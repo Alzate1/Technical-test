@@ -4,6 +4,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { HistoryService } from '../../services/history.service';
 import { HistoryItem } from '../../interfaces/history';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'history-root',
@@ -31,10 +32,38 @@ export class HistoryComponent implements OnInit {
 
   // Método para cargar el historial desde el servicio
   loadHistory(): void {
-    this.historyService.getHistory().subscribe(data => {
-      this.historyList = data; // Asignar los datos obtenidos a la lista de historial
-    }, error => {
-      console.error('Error al obtener el historial', error); // Manejar posibles errores
+    // Muestra el mensaje de carga
+    Swal.fire({
+      title: 'Cargando...',
+      text: 'Por favor, espere.',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
+
+    // Llama al servicio para obtener el historial
+    this.historyService.getHistory().subscribe({
+      next: data => {
+        this.historyList = data; // Asigna los datos obtenidos a la lista de historial
+
+        // Cierra el mensaje de carga después de recibir los datos
+        Swal.close();
+      },
+      error: error => {
+        console.error('Error al obtener el historial', error); // Manejar posibles errores
+
+        // Cierra el mensaje de carga en caso de error
+        Swal.close();
+
+        // Muestra un mensaje de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Ocurrió un error al obtener el historial.',
+          confirmButtonText: 'OK'
+        });
+      }
     });
   }
 

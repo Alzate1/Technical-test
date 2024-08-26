@@ -33,6 +33,43 @@ export class ScreenTwoComponent implements OnInit {
   }
 
   // Método para manejar el envío del formulario
+  // onSubmit(): void {
+  //   if (this.amountCop == null || this.amountCop <= 0) {
+  //     // Verifica si el presupuesto es válido
+  //     Swal.fire({
+  //       icon: 'warning',
+  //       title: 'Faltan datos',
+  //       text: 'Debes ingresar el presupuesto',
+  //       confirmButtonText: 'OK'
+  //     });
+  //   } else {
+  //     const validCountryId = this.countryId as number;
+  //     const validCityId = this.cityId as number;
+
+  //     // Guarda los datos del viaje y navega a la siguiente pantalla
+  //     this.currencyService.saveTravelData(this.amountCop, validCountryId, validCityId, this.userId)
+  //       .subscribe(response => {
+  //         Swal.fire({
+  //           icon: 'success',
+  //           title: 'Exitoso',
+  //           text: 'Datos guardados',
+  //           confirmButtonText: 'OK'
+  //         }).then(()=>{
+  //           this.travelDataService.setDates(response); // Guarda los datos en el servicio
+  //           this.router.navigate(['screenthree']);
+  //         })
+  //          // Navega a la pantalla tres
+  //       }, error => {
+  //         console.error('Error al guardar los datos:', error);
+  //         Swal.fire({
+  //           icon: 'error',
+  //           title: 'Error',
+  //           text: 'Ocurrió un error al guardar los datos',
+  //           confirmButtonText: 'OK'
+  //         });
+  //       });
+  //   }
+  // }
   onSubmit(): void {
     if (this.amountCop == null || this.amountCop <= 0) {
       // Verifica si el presupuesto es válido
@@ -46,14 +83,35 @@ export class ScreenTwoComponent implements OnInit {
       const validCountryId = this.countryId as number;
       const validCityId = this.cityId as number;
 
+      // Muestra el mensaje de carga
+      const loadingSwal = Swal.fire({
+        title: 'Cargando...',
+        text: 'Por favor, espere.',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
+
       // Guarda los datos del viaje y navega a la siguiente pantalla
       this.currencyService.saveTravelData(this.amountCop, validCountryId, validCityId, this.userId)
         .subscribe(response => {
-          console.log('Datos guardados con éxito:', response);
-          this.travelDataService.setDates(response); // Guarda los datos en el servicio
-          this.router.navigate(['screenthree']); // Navega a la pantalla tres
+          // Cierra el mensaje de carga
+
+          // Muestra el mensaje de éxito
+          Swal.fire({
+            icon: 'success',
+            title: 'Exitoso',
+            text: 'Datos guardados',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            this.travelDataService.setDates(response); // Guarda los datos en el servicio
+            this.router.navigate(['screenthree']);
+          });
         }, error => {
-          console.error('Error al guardar los datos:', error);
+          // Cierra el mensaje de carga
+
+          // Muestra el mensaje de error
           Swal.fire({
             icon: 'error',
             title: 'Error',
@@ -63,10 +121,8 @@ export class ScreenTwoComponent implements OnInit {
         });
     }
   }
-
   // Método para redirigir al usuario a la pantalla de inicio
   goBack(): void {
     this.router.navigate(['']); // Navegar a la ruta principal
   }
 }
-  

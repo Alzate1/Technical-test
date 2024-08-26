@@ -48,6 +48,10 @@ export class ScreenThreeComponent implements OnInit {
 
   // Método para manejar el envío del formulario (o clic en botón)
   onSubmit(): void {
-    this.router.navigate(['']); // Navegar a la ruta principal (puedes ajustar según sea necesario)
+    // Redirige a la ruta principal
+    this.router.navigateByUrl('/').then(() => {
+      // Recarga la página
+      window.location.reload();
+    });
   }
 }

@@ -102,8 +102,46 @@ export class WelcomeComponent implements OnInit {
   }
 
   // Método para navegar al historial
-  goHistory() {
-    this.router.navigate(['history']);
+  goHistory(): void {
+    // Muestra el mensaje de carga
+    Swal.fire({
+      title: 'Cargando...',
+      text: 'Por favor, espere.',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
+
+    // Simula una carga de datos. Reemplaza esta parte con tu lógica de carga real.
+    this.loadData().then(() => {
+      // Cierra el mensaje de carga
+      Swal.close();
+
+      // Navega a la pantalla de historial
+      this.router.navigate(['history']);
+    }).catch(error => {
+      // Cierra el mensaje de carga en caso de error
+      Swal.close();
+
+      // Muestra un mensaje de error
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Ocurrió un error al cargar los datos.',
+        confirmButtonText: 'OK'
+      });
+    });
+  }
+
+  // Simulación de función de carga de datos
+  loadData(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      // Simula un retraso en la carga de datos (reemplaza con tu lógica real)
+      setTimeout(() => {
+        resolve();
+      }, 2000); // Cambia el tiempo según el tiempo estimado de carga
+    });
   }
 
   // Método para cambiar el idioma
