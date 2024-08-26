@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <h1 class="display-4 text-center">{{ "historyTitle"|translate }}</h1>
+      <p class="lead text-center">{{ "historyDescription" |translate }}</p>
+    </div>
+  </div>
+<div class="row mt-4">
+  <div class="col-md-10 offset-md-1">
+    <div class="list-group">
+      @for (item of historyList; track $index) {
+        <div class="list-group-item">
+          <div class="d-flex justify-content-between">
+            <div>
+              <strong>{{ 'country' | translate }}:</strong> {{ item.country }}<br>
+              <strong>{{ 'city' | translate }}:</strong> {{ item.city }}<br>
+              <strong>{{ 'budgetCOP' | translate }}:</strong> {{ item.amount_cop | number }}<br>
+              <strong>{{ 'currentWeather' | translate }}:</strong> {{ item.temperature }} °C<br>
+              <strong>{{ 'localCurrency' | translate }}:</strong> {{ item.currency_name }} ({{ item.currency_symbol }})<br>
+              <strong>{{ 'convertedBudget' | translate }}:</strong> {{ item.current_amount }}<br>
+              <strong>{{ 'exchangeRate' | translate }}:</strong> {{ item.exchange_rate | number:'1.6-6' }}<br>
+            </div>
+            <div class="text-right">
+              <small>{{ 'date' | translate }}: {{ item.created_at | date:'short' }}</small>
+            </div>
+          </div>
+        </div>
+      }
+      <button (click)="goBack()" class="btn btn-primary btn-lg mt-4 mb-4">{{ 'goBack' | translate }}</button>
+
+    </div>
+  </div>
+</div>
+

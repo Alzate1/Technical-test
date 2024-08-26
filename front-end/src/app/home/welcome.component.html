@@ -1,4 +1,52 @@
-<div class="containert">
-  <h1>Hola</h1>
+<div class="container text-center mt-5">
+  <div class="row">
+    <div class="col">
+      <h1 class="display-4">{{ 'welcome' | translate }}<i class="bi bi-airplane-engines-fill"></i></h1>
+      <p class="lead">{{ 'paragraph' | translate }}</p>
+    </div>
+  </div>
+  <div class="menu-icon" (click)="toggleMenu()">
+    <i class="bi bi-list-check"></i>
+    <!-- Mini menú -->
+    <div *ngIf="menuVisible" class="mini-menu">
+      <ul>
+        <li (click)="goHistory()" >
+          <i class="bi bi-clock-history"></i> {{ "history"|translate }}
+        </li>
+        <li (click)="changeLanguage('es')">
+          <i class="bi bi-translate"></i> {{ 'languageChange' | translate }}: Español
+        </li>
+        <li (click)="changeLanguage('de')">
+          <i class="bi bi-translate"></i> {{ 'languageChange' | translate }}: Deutsch
+        </li>
+      </ul>
+    </div>
+  </div>
 
+  <div class="row mt-4">
+    <div class="col-md-6 offset-md-3">
+      <div>
+        <div class="form-group">
+          <label for="countrySelect" class="h5">{{ "selectCountry"|translate }}</label>
+
+          <select id="countrySelect" class="form-control form-control-lg" (change)="onCountryChange($event)">
+            <option value="" disabled selected>{{ "WahlenLand"|translate }}</option>
+            @for (item of countryList; track $index) {
+              <option value="{{ item.id }}">{{ item.name }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-group mt-3">
+          <label for="citySelect" class="h5">{{ "selectCity"|translate }}</label>
+          <select id="citySelect" class="form-control form-control-lg" (change)="onCityChange($event)" [disabled]="!cityList.length">
+            <option value="" disabled selected>{{ "WahlenStand"|translate }}</option>
+            @for (item of cityList; track $index) {
+              <option value="{{ item.id }}">{{ item.name }}</option>
+            }
+          </select>
+        </div>
+        <button type="submit" (click)="onSubmit($event)"class="btn btn-primary btn-lg mt-4">Siguiente</button>
+      </div>
+    </div>
+  </div>
 </div>

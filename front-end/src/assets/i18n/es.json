@@ -1,0 +1,30 @@
+{
+  "welcome": "¡Bienvenido a Travel International!",
+  "selectCountry": "Selecciona un país",
+  "selectCity": "Selecciona una ciudad",
+  "WahlenLand":"Escoge un pais",
+  "WahlenStand":"Escoge una ciudad",
+  "history": "Historial",
+  "languageChange": "Cambiar Idioma",
+  "paragraph":"Planifica tus viajes con facilidad: consulta tu presupuesto y verifica el clima de tu próximo destino en un solo lugar.",
+  "historyTitle": "Historial de Consultas",
+  "historyDescription": "Aquí están las últimas 5 consultas realizadas.",
+  "country": "País",
+  "city": "Ciudad",
+  "budgetCOP": "Presupuesto (COP)",
+  "currentWeather": "Clima Actual",
+  "localCurrency": "Moneda Local",
+  "convertedBudget": "Presupuesto Convertido",
+  "exchangeRate": "Tasa de Cambio",
+  "date": "Fecha",
+  "goBack": "Volver al Inicio",
+  "travelBudget": "Presupuesto de Viaje",
+  "enterBudget": "Ingresa tu presupuesto de viaje en pesos colombianos.",
+  "budgetCop": "Presupuesto (COP)",
+  "back": "Atrás",
+  "next": "Siguiente",
+  "tripSummary": "Resumen de Viaje",
+  "tripDetails": "Aquí están los detalles de tu viaje."
+
+}
+

@@ -1,0 +1,36 @@
+<div class="container text-center mt-5">
+  <div class="row">
+    <div class="col">
+      <h1 class="display-4">{{ 'tripSummary' | translate }}</h1>
+      <p class="lead">{{ 'tripDetails' | translate }}</p>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-8 offset-md-2">
+      <div class="list-group">
+        <div class="list-group-item">
+          <strong>{{ 'country' | translate }}:</strong> {{ country }}
+        </div>
+        <div class="list-group-item">
+          <strong>{{ 'city' | translate }}:</strong> {{ city }}
+        </div>
+        <div class="list-group-item">
+          <strong>{{ 'budgetCop' | translate }}:</strong> {{ amountCop | number }}
+        </div>
+        <div class="list-group-item">
+          <strong>{{ 'currentWeather' | translate }}:</strong> {{ temperature }} °C
+        </div>
+        <div class="list-group-item">
+          <strong>{{ 'localCurrency' | translate }}:</strong> {{ currencyName }} ({{ currencySymbol }})
+        </div>
+        <div class="list-group-item">
+          <strong>{{ 'convertedBudget' | translate }}:</strong> {{ convertedAmount }}
+        </div>
+        <div class="list-group-item">
+          <strong>{{ 'exchangeRate' | translate }}:</strong> {{ exchangeRate | number:'1.6-6' }}
+        </div>
+      </div>
+    </div>
+    <button type="submit" (click)="onSubmit()" class="btn btn-primary btn-lg mt-4">{{ 'goBack' | translate }}</button>
+  </div>
+</div>
